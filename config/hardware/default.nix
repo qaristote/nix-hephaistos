@@ -14,5 +14,13 @@
     keyboard.keyMap = "fr";
     sound.enable = false;
   };
-}
 
+  services.logind = {
+    # don't suspend on lid close
+    lidSwitch = "ignore";
+    lidSwitchExternalPower = "ignore";
+    lidSwitchDocked = "ignore";
+  };
+
+  environment.shellAliases.blankscreen = "setterm -term linux -blank </dev/tty1";
+}
