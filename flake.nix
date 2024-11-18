@@ -7,6 +7,7 @@
   outputs = {
     nixpkgs,
     my-nixpkgs,
+    nixos-hardware,
     ...
   }: {
     nixosConfigurations = let
@@ -22,9 +23,10 @@
     in {
       hephaistos = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = {inherit nixos-hardware;};
         modules =
           commonModules
-          ++ [./config ./config/hardware-configuration.nix];
+          ++ [./config];
       };
       hephaistos-test = nixpkgs.lib.nixosSystem {
         inherit system;

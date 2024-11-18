@@ -9,7 +9,13 @@
     hostName = "hephaistos";
     domain = "local";
 
-    useDHCP = false;
-    interfaces."???".useDHCP = true;
+    wireless = {
+      enable = true;
+      environmentFile = "/etc/wpa_supplicant/secrets.env";
+      networks.Quentintranet = {
+	authProtocols = [ "SAE" ];
+        psk = "@PSK@";
+      };
+    };
   };
 }

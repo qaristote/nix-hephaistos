@@ -1,9 +1,10 @@
-{modulesPath, ...}: {
+{lib, modulesPath, ...}: {
   imports = [
-    (modulesPath + "/profiles/headless.nix")
+    # (modulesPath + "/profiles/headless.nix")
     (modulesPath + "/profiles/minimal.nix")
     ./boot.nix
     ./environment.nix
+    ./hardware
     ./networking.nix
     ./nix.nix
     ./services
@@ -13,6 +14,10 @@
   # needed so that the server doesn't rebuild big packages
   # originally enabled in modulesPath + profiles/minimal.nix
   environment.noXlibs = false;
+
+  # re-enable console
+  # disabled by headless profile
+  # systemd.services."getty@tty1".enable = lib.mkForce true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

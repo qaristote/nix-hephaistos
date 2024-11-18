@@ -8,7 +8,7 @@
     gc.enable = true;
     flake = "git+file:///etc/nixos/";
   };
-  nix.settings.max-jobs = "???";
+  nix.settings.max-jobs = 4;
   nixpkgs.flake = {
     setNixPath = true;
     setFlakeRegistry = true;
