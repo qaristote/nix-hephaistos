@@ -9,7 +9,7 @@
 
   personal.hardware = {
     usb.enable = false;
-    disks.crypted = "/dev/disk/by-uuid/edfa1320-68eb-4439-bef0-226a83c05376";
+    disks.crypted = "/dev/disk/by-uuid/b7a3424f-d8cd-4985-829c-224bf0f0842a";
     firmwareNonFree.enable = true;
     keyboard.keyMap = "fr";
     sound.enable = false;
@@ -22,5 +22,5 @@
     lidSwitchDocked = "ignore";
   };
 
-  environment.shellAliases.blankscreen = "setterm -term linux -blank </dev/tty1";
+  environment.shellAliases.blankscreen = "echo 0 > /sys/class/backlight/intel_backlight/brightness; setterm -term linux -blank </dev/tty1";
 }
