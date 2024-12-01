@@ -11,10 +11,10 @@
 
     wireless = {
       enable = true;
-      environmentFile = "/etc/wpa_supplicant/secrets.env";
+      secretsFile = "/etc/wpa_supplicant/secrets";
       networks.Quentintranet = {
-	authProtocols = [ "SAE" ];
-        psk = "@PSK@";
+        authProtocols = ["SAE"];
+        pskRaw = "ext:psk";
       };
     };
   };
