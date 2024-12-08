@@ -17,5 +17,23 @@
         pskRaw = "ext:psk";
       };
     };
+
+    firewall.allowedUDPPorts = [51820];
+    wireguard = {
+      enable = true;
+      interfaces.talaria = {
+        ips = ["10.13.42.2/24"];
+        listenPort = 51820;
+        privateKeyFile = "/etc/wireguard/talaria.key";
+        peers = [
+          {
+            publicKey = "qgDFtt7qlKXW81bKpGHg793OXKPM4Hfjg9ntQrANXio=";
+            allowedIPs = ["10.13.42.1"];
+            endpoint = "hermes.aristote.fr:51820";
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+    };
   };
 }
