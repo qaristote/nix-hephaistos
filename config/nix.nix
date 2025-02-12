@@ -13,4 +13,5 @@
     setNixPath = true;
     setFlakeRegistry = true;
   };
+  system.autoUpgrade.dates = "12:30";
 }
