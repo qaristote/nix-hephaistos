@@ -22,5 +22,7 @@
     lidSwitchDocked = "ignore";
   };
 
+  # usage:
+  # blankscreen {force, poke}
   environment.shellAliases.blankscreen = "echo 0 > /sys/class/backlight/intel_backlight/brightness; setterm -term linux -blank </dev/tty1";
 }
