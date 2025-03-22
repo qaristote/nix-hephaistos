@@ -18,6 +18,7 @@ in {
     })
     remoteBuildingUsers;
 
+  # broken (doesn't do anything)
   system.userActivationScripts.remoteBuildingSetup = ''
     if [[ $(whoami) = @(${lib.concatStringsSep "|" (builtins.attrNames remoteBuildingUsers)}) ]]
     then
