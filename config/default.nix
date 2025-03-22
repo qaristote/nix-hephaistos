@@ -8,6 +8,7 @@
     ./networking.nix
     ./nix.nix
     ./services
+    ./system.nix
     ./users.nix
   ];
 
