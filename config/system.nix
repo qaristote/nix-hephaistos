@@ -7,4 +7,6 @@
     dates = "12:30";
     allowReboot = true;
   };
+
+  personal.monitoring.enable = true;
 }
