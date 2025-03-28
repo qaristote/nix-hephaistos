@@ -1,4 +1,13 @@
-{nixos-hardware, ...}: {
+{
+  nixos-hardware,
+  pkgs,
+  ...
+}:
+# usage:
+# blankscreen {force, poke}
+let
+  blankscreen = "echo 0 > /sys/class/backlight/intel_backlight/brightness; setterm -term linux -blank </dev/tty1";
+in {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -22,7 +31,13 @@
     lidSwitchDocked = "ignore";
   };
 
-  # usage:
-  # blankscreen {force, poke}
-  environment.shellAliases.blankscreen = "echo 0 > /sys/class/backlight/intel_backlight/brightness; setterm -term linux -blank </dev/tty1";
+  environment.shellAliases = {inherit blankscreen;};
+  systemd.services.blankscreen = {
+    description = "Shut down screen";
+    path = [pkgs.util-linux];
+    script = ''
+      ${blankscreen} force
+    '';
+    wantedBy = ["default.target"];
+  };
 }
