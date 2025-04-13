@@ -32,12 +32,16 @@ in {
   };
 
   environment.shellAliases = {inherit blankscreen;};
-  systemd.services.blankscreen = {
-    description = "Shut down screen";
-    path = [pkgs.util-linux];
-    script = ''
-      ${blankscreen} force
-    '';
-    wantedBy = ["default.target"];
+  systemd = {
+    suppressedSystemUnits = ["systemd-backlight@.service"];
+    services.blankscreen = {
+      description = "Shut down screen";
+      path = [pkgs.util-linux];
+      script = ''
+        ${blankscreen} force
+      '';
+      wantedBy = ["default.target"];
+      after = ["multi-user.target"];
+    };
   };
 }
