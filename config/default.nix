@@ -7,6 +7,7 @@
     ./hardware
     ./networking.nix
     ./nix.nix
+    ./storage.nix
     ./system.nix
     ./users.nix
   ];

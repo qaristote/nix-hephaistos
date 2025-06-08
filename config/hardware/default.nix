@@ -44,11 +44,4 @@ in {
       after = ["multi-user.target"];
     };
   };
-
-  boot.supportedFilesystems = ["nfs"];
-  fileSystems."/data" = {
-    device = "ds411.aristote.mesh:/volume2/hephaistos";
-    fsType = "nfs";
-    options = ["x-systemd.automount" "noauto" "x-systemd.idle-timeout=600"];
-  };
 }
