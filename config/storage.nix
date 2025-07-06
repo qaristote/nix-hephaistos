@@ -1,6 +1,6 @@
 {...}: {
   boot.supportedFilesystems = ["nfs"];
-  fileSystems."/data" = {
+  fileSystems."/backups" = {
     device = "ds411.aristote.mesh:/volume2/hephaistos";
     fsType = "nfs";
     options = [
@@ -9,10 +9,8 @@
       "noauto"
       # sleeping
       "x-systemd.idle-timeout=600"
-      # caching
-      "fsc"
     ];
   };
 
-  services.cachefilesd.enable = true;
+  services.restic.backups = {};
 }
