@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   personal.networking = {
     enable = true;
     firewall.http = true;
@@ -13,10 +14,15 @@
       enable = true;
       secretsFile = "/etc/wpa_supplicant/secrets";
       networks.Quentintranet = {
-        authProtocols = ["SAE"];
+        authProtocols = [ "SAE" ];
         pskRaw = "ext:psk";
       };
     };
+  };
+
+  services.resolved = {
+    enable = true;
+    dnsovertls = "opportunistic";
   };
 
   services.tailscale = {
