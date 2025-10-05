@@ -1,4 +1,5 @@
-{modulesPath, ...}: {
+{ modulesPath, ... }:
+{
   imports = [
     # (modulesPath + "/profiles/headless.nix")
     (modulesPath + "/profiles/minimal.nix")
@@ -7,6 +8,7 @@
     ./hardware
     ./networking.nix
     ./nix.nix
+    ./services
     ./storage.nix
     ./system.nix
     ./users.nix
