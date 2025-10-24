@@ -1,5 +1,6 @@
-{...}: {
-  boot.supportedFilesystems = ["nfs"];
+{ ... }:
+{
+  boot.supportedFilesystems = [ "nfs" ];
   fileSystems."/backups" = {
     device = "ds411.aristote.mesh:/volume2/hephaistos";
     fsType = "nfs";
@@ -12,5 +13,18 @@
     ];
   };
 
-  services.restic.backups = {};
+  services.borgbackup.jobs.srv = {
+    paths = "/srv";
+    exclude = [ ];
+    repo = "/backups/srv";
+    doInit = false;
+    encryption = {
+      mode = "repokey";
+      passCommand = "cat /etc/borg/passphrase";
+    };
+    compression = "auto,lzma";
+    startAt = "daily";
+    prune.keep.daily = 7;
+  };
+  systemd.services.borgbackup-job-srv.personal.monitor = true;
 }
