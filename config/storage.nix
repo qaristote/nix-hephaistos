@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   boot.supportedFilesystems = [ "nfs" ];
   fileSystems."/backups" = {
@@ -26,5 +26,14 @@
     startAt = "daily";
     prune.keep.daily = 7;
   };
-  systemd.services.borgbackup-job-srv.personal.monitor = true;
+  systemd.services.borgbackup-job-srv = {
+    personal.monitor = true;
+    # Check network connectivity
+    path = [ pkgs.unixtools.ping ];
+    preStart = "ping -c 1 ds411.aristote.mesh || kill -s SIGUSR1 $$";
+    unitConfig = {
+      StartLimitIntervalSec = 300;
+      StartLimitBurst = 5;
+    };
+  };
 }
