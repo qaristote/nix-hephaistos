@@ -7,7 +7,8 @@
 # blankscreen {force, poke}
 let
   blankscreen = "echo 0 > /sys/class/backlight/intel_backlight/brightness; setterm -term linux -blank </dev/tty1";
-in {
+in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -24,24 +25,24 @@ in {
     sound.enable = false;
   };
 
-  services.logind = {
+  services.logind.settings.Login = {
     # don't suspend on lid close
-    lidSwitch = "ignore";
-    lidSwitchExternalPower = "ignore";
-    lidSwitchDocked = "ignore";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+    HandleLidSwitch = "ignore";
   };
 
-  environment.shellAliases = {inherit blankscreen;};
+  environment.shellAliases = { inherit blankscreen; };
   systemd = {
-    suppressedSystemUnits = ["systemd-backlight@.service"];
+    suppressedSystemUnits = [ "systemd-backlight@.service" ];
     services.blankscreen = {
       description = "Shut down screen";
-      path = [pkgs.util-linux];
+      path = [ pkgs.util-linux ];
       script = ''
         ${blankscreen} force
       '';
-      wantedBy = ["default.target"];
-      after = ["multi-user.target"];
+      wantedBy = [ "default.target" ];
+      after = [ "multi-user.target" ];
     };
   };
 }
