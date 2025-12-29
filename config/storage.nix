@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   boot.supportedFilesystems = [ "nfs" ];
   fileSystems."/backups" = {
-    device = "ds411.aristote.mesh:/volume2/hephaistos";
+    device = "ds218.aristote.mesh:/volume1/hephaistos";
     fsType = "nfs";
     options = [
       # lazy mounting
@@ -26,14 +26,13 @@
     startAt = "daily";
     prune.keep.daily = 7;
   };
-  systemd.services.borgbackup-job-srv = {
-    personal.monitor = true;
-    # Check network connectivity
-    path = [ pkgs.unixtools.ping ];
-    preStart = "ping -c 1 ds411.aristote.mesh || kill -s SIGUSR1 $$";
-    unitConfig = {
-      StartLimitIntervalSec = 300;
-      StartLimitBurst = 5;
-    };
-  };
+  systemd.services.borgbackup-job-srv = lib.mkMerge [
+    {
+      personal.monitor = true;
+    }
+    (pkgs.lib.personal.services.checkNetwork {
+      hosts = [ "ds218.aristote.mesh" ];
+      restart = false;
+    })
+  ];
 }
