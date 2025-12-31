@@ -1,5 +1,8 @@
 { ... }:
 
 {
-  imports = [ ./git ];
+  imports = [
+    ./git
+    ./kerberos
+  ];
 }
