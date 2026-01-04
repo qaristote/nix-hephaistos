@@ -1,3 +1,12 @@
+## FAQ
+# - Why backups?
+# A shared directory with caching would require the NFS server to be up, and
+# wouldn't have the remote directory be encrypted. Plus NFS doesn't work.
+# - Why Restic?
+# Borg would be more efficient, but, as of writing this (01-2026), it doesn't
+# support# sftp and the NAS doesn't support non-admin SSH. When Borg v2 is out I
+# can # switch.
+
 { lib, pkgs, ... }:
 let
   host = "ds218.aristote.mesh";
