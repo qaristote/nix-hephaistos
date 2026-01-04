@@ -9,7 +9,7 @@
     ./networking.nix
     ./nix.nix
     ./services
-    ./storage.nix
+    ./backups.nix
     ./system.nix
     ./users.nix
   ];
