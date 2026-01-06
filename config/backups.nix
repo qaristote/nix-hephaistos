@@ -4,8 +4,8 @@
 # wouldn't have the remote directory be encrypted. Plus NFS doesn't work.
 # - Why Restic?
 # Borg would be more efficient, but, as of writing this (01-2026), it doesn't
-# support# sftp and the NAS doesn't support non-admin SSH. When Borg v2 is out I
-# can # switch.
+# support sftp and the NAS doesn't support non-admin SSH. When Borg v2 is out I
+# can switch.
 
 { lib, pkgs, ... }:
 let
@@ -31,7 +31,8 @@ in
     ];
     repository = "sftp:${host}:${path}";
     timerConfig = {
-      OnCalendar = "12:00";
+      # the NAS is on between 10pm and 6am
+      OnCalendar = "23:00";
       RandomizedDelaySec = "1h";
       Persistent = true;
     };
