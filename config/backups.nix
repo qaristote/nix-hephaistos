@@ -17,7 +17,7 @@ in
   programs.ssh.extraConfig = ''
     Host ${host}
       User hephaistos
-      ServerAliveInternal 60
+      ServerAliveInterval 60
       ServerAliveCountMax 240
   '';
 
