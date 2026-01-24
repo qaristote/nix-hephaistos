@@ -7,16 +7,21 @@
 # support sftp and the NAS doesn't support non-admin SSH. When Borg v2 is out I
 # can switch.
 
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   host = "ds218.aristote.mesh";
-  path = "/hephaistos";
+  path = "/${config.networking.hostName}";
   sshpass = "${pkgs.sshpass}/bin/sshpass -f /etc/restic/sftp.key";
 in
 {
   programs.ssh.extraConfig = ''
     Host ${host}
-      User hephaistos
+      User ${config.networking.hostName}
       ServerAliveInterval 60
       ServerAliveCountMax 240
   '';
