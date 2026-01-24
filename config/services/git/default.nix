@@ -1,10 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  imports = [ ./cgit.nix ];
+
   users.users.git = {
     isSystemUser = true;
     group = "git";
     createHome = true;
+    homeMode = "750";
     home = "/srv/git";
     shell = "${pkgs.git}/bin/git-shell";
     openssh.authorizedKeys.keys = with config.personal.lib.publicKeys.ssh; [
