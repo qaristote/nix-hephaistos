@@ -15,4 +15,6 @@
   };
 
   users.users.cgit.extraGroups = [ "git" ];
+
+  systemd.services.fcgiwrap-cgit-default.personal.monitor = true;
 }
