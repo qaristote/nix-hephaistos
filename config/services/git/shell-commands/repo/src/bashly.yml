@@ -1,0 +1,83 @@
+name: repo
+help: show and configure repositories
+
+commands:
+- name: show
+  help: show repositories
+  default: true
+
+  args:
+  - name: path
+    required: false
+    help: path in which to list repositories
+
+  flags:
+  - long: --verbose
+    short: -v
+    help: show repository description
+  - long: --tree
+    short: -t
+    help: show intermediate directories
+
+  examples:
+  - "repo show              # list all repositories"
+  - "repo show --verbose    # list repositories in details"
+  - "repo show about-me     # list repositories in the about-me/ folder"
+  - "repo show about-me/cv  # show the about-me/cv repository"
+  - "repo show --tree       # list all repositories as well as intermediate directories"
+
+- name: set
+  help: configure repository
+
+  commands:
+  - name: description
+    alias: descr
+    help: set repository description
+
+    args:
+    - name: repo
+      required: true
+      help: repository path
+
+    examples:
+    - repo set descr about-me/cv
+
+  - name: privacy
+    alias: prv
+    help: recursively set repository visibility
+
+    args:
+    - name: path
+      required: true
+      help: repository path
+    - name: visibility
+      required: true
+      help: new repository visibility
+      allowed: [public, private]
+
+    examples:
+    - "repo set prv public about-me/cv  # change visibility of a single repository"
+    - "repo set prv public about-me     # change visibility of all repositories in a tree"
+
+- name: create
+  help: create bare repositories
+
+  args:
+  - name: repo
+    required: true
+    help: repository path
+
+  examples:
+  - repo create path/to/repo
+
+- name: remove
+  alias: rm
+  help: remove repository or empty directory
+
+  args:
+  - name: path
+    required: true
+    help: repository path
+
+  examples:
+  - repo rm path/to/repo

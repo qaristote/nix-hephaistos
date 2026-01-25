@@ -1,7 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./cgit.nix ];
+  imports = [
+    ./cgit.nix
+    ./shell-commands
+  ];
 
   users.users.git = {
     isSystemUser = true;
